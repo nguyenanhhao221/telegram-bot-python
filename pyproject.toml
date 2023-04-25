@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "telegram-bot-python"
+version = "0.1.0"
+description = ""
+authors = ["Hao Nguyen <hao@haonguyen.tech>"]
+readme = "README.md"
+packages = [{include = "telegram_bot_python"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
