@@ -12,7 +12,11 @@ TELEGRAM_GROUP_CHAT_ID = os.getenv("TELEGRAM_GROUP_ID")
 BOT_USERNAME = "python_vaccine_bot"
 
 if not BOT_TELEGRAM_TOKEN:
-    raise ValueError("APP_PASSWORD is not set correctly in environment variables")
+    raise ValueError(
+        """ BOT_TELEGRAM_TOKEN is not set correctly in environment variables. 
+            Read here if you need help to retrieve the Telegram BOT Api Token: 
+            https://core.telegram.org/bots/features#botfather"""
+    )
 
 
 async def main():
