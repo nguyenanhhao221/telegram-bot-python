@@ -1,3 +1,4 @@
+import logging
 import os
 import asyncio
 import telegram
@@ -11,6 +12,9 @@ BOT_TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_GROUP_CHAT_ID = os.getenv("TELEGRAM_GROUP_ID")
 BOT_USERNAME = "python_vaccine_bot"
 
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 if not BOT_TELEGRAM_TOKEN:
     raise ValueError(
         """ BOT_TELEGRAM_TOKEN is not set correctly in environment variables. 
