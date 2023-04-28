@@ -16,7 +16,7 @@ TELEGRAM_GROUP_CHAT_ID = os.getenv("TELEGRAM_GROUP_ID")
 BOT_USERNAME = "python_vaccine_bot"
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG
 )
 
 
