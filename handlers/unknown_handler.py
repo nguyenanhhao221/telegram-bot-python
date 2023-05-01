@@ -1,11 +1,14 @@
 """
 For unknown command handlers
+Show user list of available command to try if no command is recognized by the bot
 
 """
 
 
 from telegram import Update
 from telegram.ext import ContextTypes
+
+from handlers.menu_handler import get_menu
 
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -26,3 +29,4 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id, text="Sorry I don't understand your command"
     )
+    await get_menu(update, context)

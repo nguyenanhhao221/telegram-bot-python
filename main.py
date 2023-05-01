@@ -11,6 +11,7 @@ from telegram.ext import (ApplicationBuilder, CommandHandler,
 
 from handlers.cap_handler import caps, inline_caps
 from handlers.echo_handler import echo
+from handlers.menu_handler import get_menu
 from handlers.start_handler import start
 from handlers.unknown_handler import unknown
 
@@ -50,10 +51,21 @@ if __name__ == "__main__":
 
     inline_caps_handler = InlineQueryHandler(inline_caps)
 
+    menu_handler = CommandHandler("getmenu", get_menu)
+
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     # Add these handler into the bot
     application.add_handlers(
-        [start_handler, echo_handler, cap_handler, inline_caps_handler, unknown_handler]
+        [
+            start_handler,
+            echo_handler,
+            cap_handler,
+            inline_caps_handler,
+            menu_handler,
+            # unknown_handler should be the last element
+            # Because if we add new command handler after it, the bot will use unknown first
+            unknown_handler,
+        ]
     )
 
     # This function will keep running and get update to telegram to fetch
