@@ -6,10 +6,10 @@ import os
 from typing import Final
 
 from dotenv import load_dotenv
-from telegram.ext import (ApplicationBuilder, CommandHandler, MessageHandler,
-                          filters)
+from telegram.ext import (ApplicationBuilder, CommandHandler,
+                          InlineQueryHandler, MessageHandler, filters)
 
-from handlers.cap_handler import caps
+from handlers.cap_handler import caps, inline_caps
 from handlers.echo_handler import echo
 from handlers.start_handler import start
 
@@ -46,14 +46,10 @@ if __name__ == "__main__":
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
 
     cap_handler = CommandHandler("caps", caps)
+
+    inline_caps_handler = InlineQueryHandler(inline_caps)
     # Add these handler into the bot
-    application.add_handlers(
-        [
-            start_handler,
-            echo_handler,
-            cap_handler,
-        ]
-    )
+    application.add_handlers([start_handler, echo_handler, cap_handler, inline_caps_handler])
 
     # This function will keep running and get update to telegram to fetch
     # the latest update to our bot
