@@ -3,14 +3,12 @@ Main entry handler for Telegram bot
 """
 import logging
 import os
-from telegram.ext import (
-    ApplicationBuilder,
-    CommandHandler,
-    MessageHandler,
-    filters,
-)
+from typing import Final
 
 from dotenv import load_dotenv
+from telegram.ext import (ApplicationBuilder, CommandHandler, MessageHandler,
+                          filters)
+
 from handlers.cap_handler import caps
 from handlers.echo_handler import echo
 from handlers.start_handler import start
@@ -18,8 +16,8 @@ from handlers.start_handler import start
 load_dotenv()  # Load environment variables from .env file
 
 # Telegram related
-BOT_TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_GROUP_CHAT_ID = os.getenv("TELEGRAM_GROUP_ID")
+BOT_TELEGRAM_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_GROUP_CHAT_ID: Final = os.getenv("TELEGRAM_GROUP_ID")
 BOT_USERNAME = "python_vaccine_bot"
 
 logging.basicConfig(
