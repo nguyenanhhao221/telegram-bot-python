@@ -28,7 +28,7 @@ async def caps(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Handle case if message is empty
     if not context.args:
         await context.bot.send_message(
-            chat_id=update.effective_chat.id, text="Pleas follow a string after /caps"
+            chat_id=update.effective_chat.id, text="Please follow a string after /caps"
         )
 
     await context.bot.send_message(chat_id=update.effective_chat.id, text=text_caps)
