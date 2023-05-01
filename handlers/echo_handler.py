@@ -1,7 +1,5 @@
 from telegram import Update
-from telegram.ext import (
-    ContextTypes,
-)
+from telegram.ext import ContextTypes
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -19,12 +17,6 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         None
     """
 
-    if (
-        not update.effective_chat
-        or not update.message
-        or not update.message.text
-    ):
+    if not update.effective_chat or not update.message or not update.message.text:
         return
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id, text=update.message.text
-    )
+    await context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
