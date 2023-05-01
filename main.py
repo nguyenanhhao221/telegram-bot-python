@@ -6,12 +6,14 @@ import os
 from typing import Final
 
 from dotenv import load_dotenv
-from telegram.ext import (ApplicationBuilder, CommandHandler, MessageHandler,
-                          filters)
+from telegram.ext import (ApplicationBuilder, CommandHandler,
+                          InlineQueryHandler, MessageHandler, filters)
 
-from handlers.cap_handler import caps
+from handlers.cap_handler import caps, inline_caps
 from handlers.echo_handler import echo
+from handlers.menu_handler import get_menu
 from handlers.start_handler import start
+from handlers.unknown_handler import unknown
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -46,12 +48,23 @@ if __name__ == "__main__":
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
 
     cap_handler = CommandHandler("caps", caps)
+
+    inline_caps_handler = InlineQueryHandler(inline_caps)
+
+    menu_handler = CommandHandler("getmenu", get_menu)
+
+    unknown_handler = MessageHandler(filters.COMMAND, unknown)
     # Add these handler into the bot
     application.add_handlers(
         [
             start_handler,
             echo_handler,
             cap_handler,
+            inline_caps_handler,
+            menu_handler,
+            # unknown_handler should be the last element
+            # Because if we add new command handler after it, the bot will use unknown first
+            unknown_handler,
         ]
     )
 
