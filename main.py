@@ -11,6 +11,7 @@ from telegram.ext import (ApplicationBuilder, CommandHandler,
 
 from handlers.cap_handler import caps, inline_caps
 from handlers.echo_handler import echo
+from handlers.football.get_standing import get_standing
 from handlers.menu_handler import get_menu
 from handlers.start_handler import start
 from handlers.unknown_handler import unknown
@@ -53,6 +54,8 @@ if __name__ == "__main__":
 
     menu_handler = CommandHandler("getmenu", get_menu)
 
+    get_standing_handler = CommandHandler("getstanding", get_standing)
+
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     # Add these handler into the bot
     application.add_handlers(
@@ -62,6 +65,7 @@ if __name__ == "__main__":
             cap_handler,
             inline_caps_handler,
             menu_handler,
+            get_standing_handler,
             # unknown_handler should be the last element
             # Because if we add new command handler after it, the bot will use unknown first
             unknown_handler,
