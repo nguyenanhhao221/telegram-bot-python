@@ -20,7 +20,7 @@ load_dotenv()  # Load environment variables from .env file
 # Telegram related
 BOT_TELEGRAM_TOKEN: Final = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_GROUP_CHAT_ID: Final = os.getenv("TELEGRAM_GROUP_ID")
-BOT_USERNAME = "python_vaccine_bot"
+BOT_USERNAME: Final = "python_vaccine_bot"
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
