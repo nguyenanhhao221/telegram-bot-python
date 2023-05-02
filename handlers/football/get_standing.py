@@ -1,3 +1,7 @@
+"""
+This module provides functionality to get the Premier League Standing Table
+from the Football-Data API and send it to a Telegram chat.
+"""
 from telegram import Update
 from telegram.ext import ContextTypes
 
@@ -5,6 +9,18 @@ from client_session import create_client_session
 
 
 async def get_standing(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """
+    Gets the current Premier League standing table from the Football-Data API
+    and sends it to a Telegram chat.
+
+    Args:
+        update (telegram.Update): The `Update` object representing the incoming message.
+        context (telegram.ext.Context): The `Context` object representing the current
+        state of the bot.
+
+    Returns:
+        None
+    """
     if not update.effective_chat:
         return
     await context.bot.send_message(

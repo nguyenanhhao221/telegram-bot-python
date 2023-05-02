@@ -1,3 +1,6 @@
+"""
+Handler for the /start command. Sends a greeting message to the user.
+"""
 from telegram import Update
 from telegram.ext import ContextTypes
 
