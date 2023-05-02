@@ -30,12 +30,10 @@ async def get_standing(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Get the session object, should only use the same session object in all requests
     # Read more: https://docs.aiohttp.org/en/stable/client_quickstart.html#make-a-request
     session = await create_client_session()
-    # Add params
-    params = {"season": 2022}
-    # TODO: Not hard code year, not hard code League
+    # TODO: Not hard code League
 
     # Make the request
-    async with session.get(url="/v4/competitions/PL/standings", params=params) as res:
+    async with session.get(url="/v4/competitions/PL/standings") as res:
         if res.status == 200:
             data = await res.json()
             current_standings = data["standings"][0]["table"]
