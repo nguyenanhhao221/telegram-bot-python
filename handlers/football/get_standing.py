@@ -27,12 +27,21 @@ async def get_standing(update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id=update.effective_chat.id,
         text="""Getting the Premier League Standing Table""",
     )
+    # Send a sticker using the sticker id
+    # How to get a sticker id:
+    # https://stackoverflow.com/questions/34355648/telegram-getting-file-id-for-existing-sticker
+    await context.bot.send_sticker(
+        chat_id=update.effective_chat.id,
+        disable_notification=True,
+        sticker="CAACAgIAAxkBAAPhZFFwJxT92fned0LYptYIXtuCcBUAAgIBAAJWnb0KTuJsgctA5P8vBA",
+    )
     # Get the session object, should only use the same session object in all requests
     # Read more: https://docs.aiohttp.org/en/stable/client_quickstart.html#make-a-request
     session = await create_client_session()
     # TODO: Not hard code League
 
     # Make the request
+    # Get the standing
     async with session.get(url="/v4/competitions/PL/standings") as res:
         if res.status == 200:
             data = await res.json()

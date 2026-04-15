@@ -7,11 +7,13 @@ from typing import Final
 
 from dotenv import load_dotenv
 from telegram.ext import (ApplicationBuilder, CommandHandler,
-                          InlineQueryHandler, MessageHandler, filters)
+                          ConversationHandler, InlineQueryHandler,
+                          MessageHandler, filters)
 
 from handlers.cap_handler import caps, inline_caps
 from handlers.echo_handler import echo
 from handlers.football.get_standing import get_standing
+from handlers.football.get_week_schedule import cancel, get_competitions
 from handlers.menu_handler import get_menu
 from handlers.start_handler import start
 from handlers.unknown_handler import unknown
@@ -38,8 +40,8 @@ if not BOT_TELEGRAM_TOKEN:
     )
 
 
-if __name__ == "__main__":
-    # Start the bot
+def main():
+    """Start the bot"""
     application = ApplicationBuilder().token(BOT_TELEGRAM_TOKEN).build()
 
     # Add a handler when the bot receive the command "/start",
@@ -56,6 +58,18 @@ if __name__ == "__main__":
 
     get_standing_handler = CommandHandler("getstanding", get_standing)
 
+    # Conversation states
+    COMPETITION_SELECTION = range(1)
+    # conv_handler = ConversationHandler(
+    #     entry_points=[CommandHandler("schedule", get_competitions)],
+    #     states={
+    #         COMPETITION_SELECTION: [
+    #             MessageHandler(filters.TEXT & ~filters.COMMAND, competition_selection)
+    #         ],
+    #     },
+    #     fallbacks=[CommandHandler("cancel", cancel)],
+    # )
+
     unknown_handler = MessageHandler(filters.COMMAND, unknown)
     # Add these handler into the bot
     application.add_handlers(
@@ -66,6 +80,7 @@ if __name__ == "__main__":
             inline_caps_handler,
             menu_handler,
             get_standing_handler,
+            # conv_handler,
             # unknown_handler should be the last element
             # Because if we add new command handler after it, the bot will use unknown first
             unknown_handler,
@@ -75,3 +90,7 @@ if __name__ == "__main__":
     # This function will keep running and get update to telegram to fetch
     # the latest update to our bot
     application.run_polling()
+
+
+if __name__ == "__main__":
+    main()

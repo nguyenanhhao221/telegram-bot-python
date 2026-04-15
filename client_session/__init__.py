@@ -37,8 +37,11 @@ if not FOOTBALL_ORG_API_KEY:
 
 async def create_client_session() -> aiohttp.ClientSession:
     """
-    Create a new `aiohttp.ClientSession` object with the API key for football-data.org
-    set as a header.
+    Create a new `aiohttp.ClientSession` object
+    - With the API key for football-data.org
+      set as a header.
+    - The base url is also set here
+
 
     Returns:
         An `aiohttp.ClientSession` object.
